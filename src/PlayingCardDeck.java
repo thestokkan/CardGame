@@ -4,16 +4,24 @@ public class PlayingCardDeck {
   LinkedList<PlayingCard> deck = new LinkedList<>();
   private int size;
 
-  public void shuffle() {
+  public PlayingCardDeck() {
+    newDeck();
+  }
+
+  public void newDeck() {
+    deck.clear();
     for (CardColors color : CardColors.values()) {
       for (CardValues value : CardValues.values()) {
         deck.add(new PlayingCard(color, value));
       }
     }
-    System.out.println("Cards added");
   }
 
-  public void printDeck() {
+  public void shuffle() {
+    // shuffle remaining cards in deck
+  }
+
+  public void viewDeck() {
     for (PlayingCard card: deck) {
       System.out.println(card.getColor() + " " + card.getValue());
     }
@@ -35,4 +43,5 @@ public class PlayingCardDeck {
   public int getSize() {
     return deck.size();
   }
+
 }

@@ -1,24 +1,49 @@
+import java.util.Scanner;
 
 public class PlayingCardGame {
+  static Scanner input = new Scanner(System.in);
+
   public static void main(String[] args) {
+    displayGameRules();
 
     PlayingCardDeck deck = new PlayingCardDeck();
-    System.out.println(deck.getClass());
-
     deck.shuffle();
-    System.out.println("=== Initial deck ===");
-    System.out.println(deck.getSize());
-    deck.printDeck();
 
-    System.out.println("=== Dealt cards ===");
-    PlayingCard card1 = deck.deal();
-    PlayingCard card2 = deck.deal();
-    card1.showCard();
-    card2.showCard();
-
-    System.out.println("=== Remaining cards ===");
-    deck.printDeck();
-    System.out.println(deck.getSize());
+    displayMenu();
 
   }
+
+  private static void displayGameRules() {
+    System.out.println("\n=== GAME RULES ===");
+    System.out.println("The game goes as follows:");
+    System.out.println("Each round, two cards are drawn from the top of the " +
+                       "deck.");
+    System.out.println("One card is yours, the other is open.");
+    System.out.println("Make a guess about whether your card is higher or " +
+                       "lower than the open card.");
+    System.out.println("If you guess correctly, you win, if your guess is " +
+                       "wrong, " +
+                       "you lose.");
+    System.out.println("If the cards have the same value, the colors take the" +
+                       " following precendence: ");
+    System.out.println("SPADES (♠) > HEARTS (♥) > DIAMONDS (♦) > CLUBS (♣).");
+    System.out.println("GOOD LUCK!");
+  }
+
+  private static void displayMenu() {
+    System.out.println("\n=== MENU ===");
+    System.out.println("1. Play game");
+    System.out.println("2. Display game rules");
+    System.out.println("3. Quit");
+  }
+
+  private static void playGame() {
+    // Deal cards
+    // Update deck
+  }
+
+  private static void decideWinner() {
+
+  }
+
 }
