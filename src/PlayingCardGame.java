@@ -2,15 +2,66 @@ import java.util.Scanner;
 
 public class PlayingCardGame {
   static Scanner input = new Scanner(System.in);
+  static PlayingCardDeck deck = new PlayingCardDeck();
 
   public static void main(String[] args) {
     displayGameRules();
-
-    PlayingCardDeck deck = new PlayingCardDeck();
     deck.shuffle();
+    String choice;
 
-    displayMenu();
+    do {
+      displayMenu();
+      choice = chooseFromMenu();
+    } while (choice.equals("menu"));
 
+    // Game loop
+    while (choice.equals("play")) {
+      playRound();
+
+      // Press ENTER to continue
+
+      do {
+        displayMenu();
+        choice = chooseFromMenu();
+      } while (choice.equals("menu"));
+    }
+  }
+
+  public static String chooseFromMenu() {
+    if (input.hasNextInt()) {
+      int choice = input.nextInt();
+      input.nextLine();
+      switch (choice) {
+          case 1 : return "play";
+          case 2 :
+            displayGameRules();
+            break;
+          case 3 : return "quit";
+        }
+    }
+    return "menu";
+  }
+
+  private static void playRound() {
+    PlayingCard card1 = deck.deal();
+    PlayingCard card2 = deck.deal();
+
+    System.out.println("\nOpen card:");
+    card2.showCard();
+
+    // User makes guess
+    System.out.print("High or low? ");
+
+    // Show hidden card
+    System.out.println("\nYour card:");
+    card1.showCard();
+
+    // Decide if win or lose
+    // Display results
+    System.out.println("\nResults: ");
+
+    deck.addToBottom(card1);
+    deck.addToBottom(card2);
   }
 
   private static void displayGameRules() {
@@ -38,15 +89,7 @@ public class PlayingCardGame {
     System.out.println("1. Play game");
     System.out.println("2. Display game rules");
     System.out.println("3. Quit");
-  }
-
-  private static void playGame() {
-    // Deal cards
-    // Update deck
-  }
-
-  private static void decideWinner() {
-
+    System.out.print("\nYour choice: ");
   }
 
 }
