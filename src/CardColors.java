@@ -1,6 +1,6 @@
 public enum CardColors {
-  DIAMONDS,
+  SPADES,
   HEARTS,
-  CLUBS,
-  SPADES
+  DIAMONDS,
+  CLUBS
 }

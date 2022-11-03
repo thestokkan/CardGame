@@ -24,10 +24,13 @@ public class PlayingCardGame {
     System.out.println("If you guess correctly, you win, if your guess is " +
                        "wrong, " +
                        "you lose.");
-    System.out.println("If the cards have the same value, the colors take the" +
-                       " following precendence: ");
-    System.out.println("SPADES (♠) > HEARTS (♥) > DIAMONDS (♦) > CLUBS (♣).");
-    System.out.println("GOOD LUCK!");
+    System.out.println("If the cards have the same value, the colors are " +
+                       "compared.");
+    System.out.println("\nCard precedence:");
+    System.out.println("Values: Ace > King > Queen > Jack > numbered" +
+                       " cards in order");
+    System.out.println("Colors: SPADES (♠) > HEARTS (♥) > DIAMONDS (♦) > " +
+                       "CLUBS (♣).");
   }
 
   private static void displayMenu() {
