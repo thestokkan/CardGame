@@ -7,23 +7,19 @@ public class PlayingCardGame {
   public static void main(String[] args) {
     displayGameRules();
     deck.shuffle();
-    String choice;
-
-    do {
-      displayMenu();
-      choice = chooseFromMenu();
-    } while (choice.equals("menu"));
 
     // Game loop
-    while (choice.equals("play")) {
-      playRound();
-
-      // Press ENTER to continue
-
+    String menuChoice = "";
+    while (true) {
       do {
         displayMenu();
-        choice = chooseFromMenu();
-      } while (choice.equals("menu"));
+        menuChoice = chooseFromMenu();
+      } while (menuChoice.equals("menu"));
+
+      if (menuChoice.equals("quit")) break;
+
+      playRound();
+      // Press ENTER to continue
     }
   }
 
@@ -32,12 +28,15 @@ public class PlayingCardGame {
       int choice = input.nextInt();
       input.nextLine();
       switch (choice) {
-          case 1 : return "play";
-          case 2 :
-            displayGameRules();
-            break;
-          case 3 : return "quit";
-        }
+        case 1:
+          return "play";
+        case 2:
+          displayGameRules();
+          break;
+        case 3:
+          System.out.println("\nThanks for playing!");
+          return "quit";
+      }
     }
     return "menu";
   }
@@ -49,19 +48,49 @@ public class PlayingCardGame {
     System.out.println("\nOpen card:");
     card2.showCard();
 
-    // User makes guess
-    System.out.print("High or low? ");
+    String guess = getUserGuess();
+    System.out.println("You guessed: " + guess);
 
     // Show hidden card
     System.out.println("\nYour card:");
     card1.showCard();
 
-    // Decide if win or lose
-    // Display results
-    System.out.println("\nResults: ");
+    String result = getResults(card1, card2, guess);
+    displayResult(result);
 
     deck.addToBottom(card1);
     deck.addToBottom(card2);
+  }
+
+  private static String getUserGuess() {
+    System.out.print("Take a guess: high or low (H/L)? ");
+    String guess = "";
+    while (!guess.equalsIgnoreCase("H") && !guess.equalsIgnoreCase("L")) {
+      guess = input.nextLine();
+    }
+    return guess;
+  }
+
+  private static void displayResult(String result) {
+    if (result.equals("win")) {
+      System.out.println("You win!");
+    } else {
+      System.out.println("You lose!");
+    }
+  }
+
+  private static String getResults(PlayingCard card1, PlayingCard card2,
+                                   String guess) {
+    if (card1.getValue().compareTo(card2.getValue()) > 0) {
+      return guess.equalsIgnoreCase("H") ? "win" : "lose";
+    } else if (card1.getValue().compareTo(card2.getValue()) < 0) {
+      return guess.equalsIgnoreCase("L") ? "win" : "lose";
+    } else {
+      if (card1.getColor().compareTo(card2.getColor()) > 0) {
+        return guess.equalsIgnoreCase("H") ? "win" : "lose";
+      }
+    }
+    return "lose";
   }
 
   private static void displayGameRules() {
